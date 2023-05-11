@@ -41,13 +41,10 @@ path crane_unloading_exhaustive(const grid& setting) {
 
   path best(setting);
 
-  // TODO: implement the exhaustive search algorithm, then delete this
-  // comment.
-
   std::vector<path> allValidPaths;
 
   std::queue<path> permutations;
-  permutations.push(best); // Start with an empty path
+  permutations.push(best);
   
   // Fills the vector allValidPaths with all valid permutaions of paths
   while (!permutations.empty()) {
@@ -56,12 +53,12 @@ path crane_unloading_exhaustive(const grid& setting) {
     
     size_t length = current.steps().size();
     
-    // Print the current permutation if its length is greater than 0
+    // Add the current path it its length is greater than 0
     if (length > 0) {
       allValidPaths.push_back(current);
     }
     
-    // Add 'L' and 'D' to the current permutation and enqueue the new permutations
+    // Add steps 'east' and 'South' to the current permutation and enqueue the new permutations
     if (length <= max_steps) {
       path goRight = current;
       if(goRight.is_step_valid(STEP_DIRECTION_EAST))
