@@ -164,6 +164,26 @@ public:
     // done
     return result;
   }
+
+  grid& operator=(const grid& other) {
+        // Check for self-assignment
+        if (this == &other) {
+            return *this;
+        }
+
+        // Copy the member variables from 'other' to 'this'
+        // ... (perform any necessary assignment operations)
+        this->cells_.clear();
+        for(size_t i = 0; i < other.rows(); ++i)
+        {
+          for(size_t j = 0; j < other.columns(); ++i)
+          {
+            this->set(i, j, other.get(i,j));
+          }
+        }
+
+        return *this;
+    }
 };
 
 // Type for a legal step direction; starting at (0, 0) counts as a step.
@@ -341,6 +361,26 @@ public:
   bool operator==(const path& o) const {
     return std::equal(steps_.begin(), steps_.end(), o.steps_.begin());
   }
+
+  path& operator=(const path& other) {
+        // Check for self-assignment
+        if (this == &other) {
+            return *this;
+        }
+
+        // Copy the member variables from 'other' to 'this'
+        //this->setting_ = other.setting();
+        this->steps_.clear();
+        this->initialize(other.setting());
+        this->steps_.clear();
+        this->steps_ = other.steps();
+        this->final_row_ = other.final_row();
+        this->final_column_ = other.final_column();
+        this->total_cranes_ = other.total_cranes();
+        // ... (perform any necessary assignment operations)
+
+        return *this;
+    }
 
 };
 
